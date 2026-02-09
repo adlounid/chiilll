@@ -1,61 +1,44 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioStream Ultra</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <meta charset="UTF-8">
+  <title>Läslista</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <div class="logo">Chill<span>tix</span></div>
-    
-    <div class="mode-toggle">
-        <button id="mode-movies" class="active" onclick="switchMode('movies')">Movies & Series</button>
-        <button id="mode-iptv" onclick="switchMode('iptv')">Live TV</button>
-    </div>
+  <h1>Min Läslista</h1>
 
-    <div class="nav-right">
-        <div id="iptv-selector" class="hidden">
-            <select id="countrySelect" onchange="fetchIPTV()">
-                <option value="SE">Sweden</option>
-                <option value="US">USA</option>
-                <option value="GB">UK</option>
-                <option value="IT">Italy</option>
-                <option value="ES">Spain</option>
-                <option value="ALL">All Countries</option>
-            </select>
-        </div>
-        <div class="search-box" id="search-container">
-            <input type="text" id="query" placeholder="Sök...">
-            <button onclick="doSearch()">🔍</button>
-        </div>
-    </div>
-</header>
+  <form id="book-form">
+    <input type="text" id="title" placeholder="Titel" required>
+    <input type="text" id="author" placeholder="Författare" required>
 
-<main id="content-area" class="fade-in">
-    </main>
+    <label class="checkbox">
+      Favorit
+      <input type="checkbox" id="favorite">
+    </label>
 
-<div id="player-overlay">
-    <div class="player-window scale-in">
-        <div class="player-bar">
-            <div id="series-ui" class="series-controls" style="display:none;">
-                <select id="sVal" onchange="loadEpisodes()"></select>
-                <select id="eVal" onchange="loadContent()"></select>
-            </div>
-            <div id="playing-title">Streaming...</div>
-            <div class="close-btn" onclick="stopPlayer()">&times;</div>
-        </div>
-        <div class="viewport">
-            <iframe id="moviePlayer" style="display:none;" allowfullscreen></iframe>
-            <video id="iptvPlayer" style="display:none;" controls autoplay></video>
-        </div>
-    </div>
-</div>
+    <button type="submit">Lägg till bok</button>
+  </form>
 
-<script src="script.js"></script>
+  <div class="controls">
+    <select id="filter">
+      <option value="all">Alla böcker</option>
+      <option value="favorites">Endast favoriter</option>
+    </select>
+
+    <select id="sort">
+      <option value="title-asc">Titel A–Ö</option>
+      <option value="title-desc">Titel Ö–A</option>
+      <option value="author-asc">Författare A–Ö</option>
+      <option value="author-desc">Författare Ö–A</option>
+      <option value="added-asc">Äldst först</option>
+      <option value="added-desc">Nyast först</option>
+    </select>
+  </div>
+
+  <ul id="book-list"></ul>
+
+  <script type="module" src="script.js"></script>
 </body>
 </html>
